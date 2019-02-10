@@ -5,6 +5,6 @@ public class Board {
   }
 
   public String getCase(int x, int y) {
-    return null;
+    return "n";
   }
 }

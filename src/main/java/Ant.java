@@ -13,6 +13,6 @@ public class Ant {
   }
 
   public Direction getDirection() {
-    return null;
+    return Direction.NORTH;
   }
 }
