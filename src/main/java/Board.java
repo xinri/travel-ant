@@ -18,8 +18,6 @@ public class Board {
 
   public void setBoard(String[] boardRepresentation) {
 
-
-
     width = boardRepresentation[0].replace(" ", "").length();
     height = boardRepresentation.length;
 
