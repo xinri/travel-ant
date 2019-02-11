@@ -13,34 +13,19 @@ public class Ant {
   }
 
   public void move(Board board) {
-    if (Case.WHITE == board.getCase(x, y)) {
-      if (direction == Direction.NORTH) {
-        direction = Direction.WEST;
-      } else if (direction == Direction.WEST) {
-        direction = Direction.SOUTH;
-      } else if (direction == Direction.SOUTH) {
-        direction = Direction.EAST;
-      } else {
-        direction = Direction.NORTH;
-      }
-    }
-
-    if (Case.BLACK == board.getCase(x, y)) {
-      if (direction == Direction.NORTH) {
-        direction = Direction.EAST;
-      } else if (direction == Direction.EAST) {
-        direction = Direction.SOUTH;
-      } else if (direction == Direction.SOUTH) {
-        direction = Direction.WEST;
-      } else {
-        direction = Direction.NORTH;
-      }
-    }
-
+    direction = direction.nextDirection(board.getCase(x, y));
     board.nextColor(x, y);
   }
 
   public Direction getDirection() {
     return direction;
+  }
+
+  public int getX() {
+    return x;
+  }
+
+  public int getY() {
+    return y;
   }
 }

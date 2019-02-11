@@ -139,4 +139,23 @@ public class BoardShould {
     assertThat(board.getCase(0, 0)).isEqualTo(Case.ORANGE);
     assertThat(ant.getDirection() == Direction.WEST).isTrue();
   }
+
+  @Test
+  public void move_forward_and_change_case_to_white_when_ant_is_in_a_orange_case_and_face_east() {
+    // given
+    Board board = new Board();
+    board.setBoard(new String[]{"o n"});
+    Ant ant = new Ant();
+    ant.setPosition(0, 0);
+    ant.setDirection(Direction.EAST);
+
+    // when
+    ant.move(board);
+
+    // then
+    assertThat(board.getCase(0, 0)).isEqualTo(Case.WHITE);
+    assertThat(ant.getDirection() == Direction.WEST).isTrue();
+    assertThat(ant.getX() == 1).isTrue();
+    assertThat(ant.getY() == 0).isTrue();
+  }
 }
