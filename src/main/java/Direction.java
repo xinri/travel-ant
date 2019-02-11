@@ -16,10 +16,16 @@ public enum Direction {
     WEST.nextDirectionFromWhite = SOUTH;
     SOUTH.nextDirectionFromWhite = EAST;
     EAST.nextDirectionFromWhite = NORTH;
+
+    NORTH.oppositeDirection = SOUTH;
+    WEST.oppositeDirection = EAST;
+    SOUTH.oppositeDirection = NORTH;
+    EAST.oppositeDirection = WEST;
   }
 
   private Direction nextDirectionFromBlack;
   private Direction nextDirectionFromWhite;
+  private Direction oppositeDirection;
   private Function<Position, Function<Integer, Function<Integer, Position>>> moveFunction;
 
   Direction(Function<Position, Function<Integer, Function<Integer, Position>>> moveFunction) {
@@ -33,6 +39,15 @@ public enum Direction {
 
     if (boardCase == Case.BLACK) {
       return this.nextDirectionFromBlack;
+    }
+
+    return this;
+  }
+
+  public Direction oppositeDirectionIfGoingOutside(Position oldPosition, Position newPosition) {
+    if (oldPosition.getX() == newPosition.getX() && oldPosition.getY() == newPosition
+        .getY()) {
+      return oppositeDirection;
     }
     return this;
   }

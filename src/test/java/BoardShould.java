@@ -215,4 +215,83 @@ public class BoardShould {
     assertThat(ant.getPosition().getX() == 0).isTrue();
     assertThat(ant.getPosition().getY() == 1).isTrue();
   }
+
+
+  /************* stay still but change direction to 180° ********/
+
+  @Test
+  public void stay_change_opposite_direction_and_change_case_to_white_when_ant_is_in_a_orange_case_and_face_east() {
+    // given
+    Board board = new Board();
+    board.setBoard(new String[]{"n o"});
+    Ant ant = new Ant();
+    ant.setPosition(1, 0);
+    ant.setDirection(Direction.EAST);
+
+    // when
+    ant.move(board);
+
+    // then
+    assertThat(board.getCase(1, 0)).isEqualTo(Case.WHITE);
+    assertThat(ant.getDirection() == Direction.WEST).isTrue();
+    assertThat(ant.getPosition().getX() == 1).isTrue();
+    assertThat(ant.getPosition().getY() == 0).isTrue();
+  }
+
+  @Test
+  public void stay_change_opposite_direction_and_change_case_to_white_when_ant_is_in_a_orange_case_and_face_north() {
+    // given
+    Board board = new Board();
+    board.setBoard(new String[]{"o", "n"});
+    Ant ant = new Ant();
+    ant.setPosition(0, 0);
+    ant.setDirection(Direction.NORTH);
+
+    // when
+    ant.move(board);
+
+    // then
+    assertThat(board.getCase(0, 0)).isEqualTo(Case.WHITE);
+    assertThat(ant.getDirection() == Direction.SOUTH).isTrue();
+    assertThat(ant.getPosition().getX() == 0).isTrue();
+    assertThat(ant.getPosition().getY() == 0).isTrue();
+  }
+
+  @Test
+  public void stay_change_opposite_direction_and_change_case_to_white_when_ant_is_in_a_orange_case_and_face_west() {
+    // given
+    Board board = new Board();
+    board.setBoard(new String[]{"o n"});
+    Ant ant = new Ant();
+    ant.setPosition(0, 0);
+    ant.setDirection(Direction.WEST);
+
+    // when
+    ant.move(board);
+
+    // then
+    assertThat(board.getCase(0, 0)).isEqualTo(Case.WHITE);
+    assertThat(ant.getDirection() == Direction.EAST).isTrue();
+    assertThat(ant.getPosition().getX() == 0).isTrue();
+    assertThat(ant.getPosition().getY() == 0).isTrue();
+  }
+
+  @Test
+  public void stay_change_opposite_direction_and_change_case_to_white_when_ant_is_in_a_orange_case_and_face_south() {
+    // given
+    Board board = new Board();
+    board.setBoard(new String[]{"n", "o"});
+    Ant ant = new Ant();
+    ant.setPosition(0, 1);
+    ant.setDirection(Direction.SOUTH);
+
+    // when
+    ant.move(board);
+
+    // then
+    assertThat(board.getCase(0, 1)).isEqualTo(Case.WHITE);
+    assertThat(ant.getDirection() == Direction.NORTH).isTrue();
+    assertThat(ant.getPosition().getX() == 0).isTrue();
+    assertThat(ant.getPosition().getY() == 1).isTrue();
+  }
 }

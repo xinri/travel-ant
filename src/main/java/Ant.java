@@ -16,7 +16,9 @@ public class Ant {
 
     if (board.getCase(position.getX(), position.getY()) == Case.ORANGE) {
       board.nextColor(position.getX(), position.getY());
+      Position oldPosition = position;
       position = direction.nextPosition(position, board.getWidth(), board.getHeight());
+      direction = direction.oppositeDirectionIfGoingOutside(oldPosition, position);
     } else {
       board.nextColor(position.getX(), position.getY());
     }
