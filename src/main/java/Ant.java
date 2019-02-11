@@ -1,11 +1,10 @@
 public class Ant {
 
   private Direction direction;
-  private int x, y;
+  private Position position;
 
   public void setPosition(int x, int y) {
-    this.x = x;
-    this.y = y;
+    this.position = new Position(x, y);
   }
 
   public void setDirection(Direction direction) {
@@ -13,19 +12,22 @@ public class Ant {
   }
 
   public void move(Board board) {
-    direction = direction.nextDirection(board.getCase(x, y));
-    board.nextColor(x, y);
+    direction = direction.nextDirection(board.getCase(position.getX(), position.getY()));
+
+    if (board.getCase(position.getX(), position.getY()) == Case.ORANGE) {
+      board.nextColor(position.getX(), position.getY());
+      position = direction.nextPosition(position, board.getWidth(), board.getHeight());
+    } else {
+      board.nextColor(position.getX(), position.getY());
+    }
   }
 
   public Direction getDirection() {
     return direction;
   }
 
-  public int getX() {
-    return x;
+  public Position getPosition() {
+    return position;
   }
 
-  public int getY() {
-    return y;
-  }
 }

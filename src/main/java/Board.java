@@ -13,17 +13,21 @@ public class Board {
   }
 
   private Case[][] board;
+  private int width;
+  private int height;
 
   public void setBoard(String[] boardRepresentation) {
 
-    int width = boardRepresentation[0].length();
-    int height = boardRepresentation.length;
+
+
+    width = boardRepresentation[0].replace(" ", "").length();
+    height = boardRepresentation.length;
 
     board = new Case[height][width];
 
     for (int row = 0; row < height; row++) {
       for (int column = 0; column < width; column++) {
-        board[row][column] = mapOfStringToCase.get(boardRepresentation[row].charAt(column));
+        board[row][column] = mapOfStringToCase.get(boardRepresentation[row].charAt(column*2));
       }
     }
   }
@@ -34,5 +38,13 @@ public class Board {
 
   public void nextColor(int x, int y) {
     board[y][x] = board[y][x].getNextColor();
+  }
+
+  public int getWidth() {
+    return width;
+  }
+
+  public int getHeight() {
+    return height;
   }
 }

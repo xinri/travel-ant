@@ -1,5 +1,10 @@
+import java.util.function.Function;
+
 public enum Direction {
-  NORTH, WEST, SOUTH, EAST;
+  NORTH(position -> width -> height -> position.moveUp()),
+  WEST(position -> width -> height -> position.moveLeft()),
+  SOUTH(position -> width -> height -> position.moveDown(height)),
+  EAST(position -> width -> height -> position.moveRight(width));
 
   static {
     NORTH.nextDirectionFromBlack = EAST;
@@ -15,6 +20,11 @@ public enum Direction {
 
   private Direction nextDirectionFromBlack;
   private Direction nextDirectionFromWhite;
+  private Function<Position, Function<Integer, Function<Integer, Position>>> moveFunction;
+
+  Direction(Function<Position, Function<Integer, Function<Integer, Position>>> moveFunction) {
+    this.moveFunction = moveFunction;
+  }
 
   public Direction nextDirection(Case boardCase) {
     if (boardCase == Case.WHITE) {
@@ -25,5 +35,9 @@ public enum Direction {
       return this.nextDirectionFromBlack;
     }
     return this;
+  }
+
+  public Position nextPosition(Position actualPosition, int width, int height) {
+    return moveFunction.apply(actualPosition).apply(width).apply(height);
   }
 }
